@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="scaletech.scaletechdrawer.ScaletechDrawer"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Scaletech Drawer</name>
+    <description>My widget description</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <property key="position" type="enumeration" defaultValue="right">
+                <caption>Overlay position</caption>
+                <description>Orientation for the overlay.</description>
+                <enumerationValues>
+                    <enumerationValue key="top">top</enumerationValue>
+                    <enumerationValue key="right">right</enumerationValue>
+                    <enumerationValue key="bottom">bottom</enumerationValue>
+                    <enumerationValue key="left">left</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="size" type="integer" defaultValue="600">
+                <caption>Overlay size</caption>
+                <description>
+                    In pixels. For horizontal overlays it's a width, for vertical it's used as height.
+                </description>
+            </property>
+            <property key="showHeader" type="boolean" defaultValue="true">
+                <caption>Show the header?</caption>
+                <description>Display the pagetitle in a header.</description>
+            </property>
+            <property key="closeButtonClass" type="string" defaultValue="overlay-close-button">
+                <caption>Close button class name</caption>
+                <description>
+                    trigger visual transitions to close the overlay (does not automatically trigger on close page inside
+                    Mendix).
+                </description>
+            </property>
+            <property key="underlayColor" type="string" required="false">
+                <caption>Underlay color</caption>
+                <description>
+                    Set the background color for the underlay, for example: green, rgba(255, 0, 0), #BADA55. The
+                    underlay is black when not filled.
+                </description>
+            </property>
+        </propertyGroup>
+
+        <propertyGroup caption="Advanced">
+            <property key="closeAction" type="action" required="false">
+                <caption>Close action</caption>
+                <description>Custom close action for the overlay when clicking on the underlay.</description>
+            </property>
+            <property key="shouldClosePage" type="boolean" defaultValue="false">
+                <caption>Trigger close page?</caption>
+                <description>
+                    Does a button (defined by Close button class name) need to trigger the popup's 'close page' action
+                    within Mendix? Set to no if you handle this yourself.
+                </description>
+            </property>
+            <property key="overlayStyle" type="enumeration" defaultValue="over">
+                <caption>Overlay style</caption>
+                <description>The way that the overlay comes in.</description>
+                <enumerationValues>
+                    <enumerationValue key="over">Overlay</enumerationValue>
+                    <enumerationValue key="push">Push content aside</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="renderUnderlay" type="boolean" defaultValue="true">
+                <caption>Render underlay?</caption>
+                <description>Render the region that can be clicked on for also closing the overlay.</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
