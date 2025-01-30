@@ -30,11 +30,16 @@ const DrawerPanel: FC<DrawerProps> = ({
     const page = document.querySelector<HTMLElement>(".mx-page");
 
     useEffect(() => {
-        const modalElement = document.querySelector<HTMLElement>(".convert-Drawer-overlay")?.closest(".modal-dialog");
-        if (modalElement) {
-            setModal(modalElement as any);
-            setCanRender(true);
-        }
+        const modalElements = document.querySelectorAll<HTMLElement>(".convert-Drawer-overlay");
+
+        modalElements.forEach(element => {
+            const modalElement = element.closest(".modal-dialog");
+            if (modalElement) {
+                console.warn("modalElement", modalElement);
+                setModal(modalElement as any); // If setModal is designed for only one element, you might need to rethink this
+                setCanRender(true);
+            }
+        });
     }, []);
 
     useEffect(() => {
