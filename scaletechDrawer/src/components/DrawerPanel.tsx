@@ -1,6 +1,8 @@
 import { createElement, FC, useEffect, useState } from "react";
 import { OverlayStyleEnum, PositionEnum } from "typings/ScaletechDrawerProps";
 
+import { ActionValue } from "mendix";
+
 import "../ui/ScaletechDrawer.css";
 
 interface DrawerProps {
@@ -8,8 +10,13 @@ interface DrawerProps {
     position?: PositionEnum;
     renderUnderlay?: boolean;
     showHeader?: boolean;
+    showFooter?: boolean;
     size?: number;
     underlayColor?: string;
+    saveButtonTitle?: string;
+    cancelButtonTitle?: string;
+    saveButtonAction?: ActionValue;
+    cancelButtonAction?: ActionValue;
 }
 
 const DrawerPanel: FC<DrawerProps> = ({
@@ -17,8 +24,13 @@ const DrawerPanel: FC<DrawerProps> = ({
     position = "right",
     renderUnderlay = true,
     showHeader = true,
+    showFooter = true,
     size = 300,
-    underlayColor
+    underlayColor,
+    saveButtonTitle,
+    cancelButtonTitle,
+    saveButtonAction,
+    cancelButtonAction
 }) => {
     const [canRender, setCanRender] = useState(false);
     const [modal, setModal] = useState<HTMLElement | null>(null);
@@ -31,7 +43,7 @@ const DrawerPanel: FC<DrawerProps> = ({
             const modalElement = element.closest(".modal-dialog");
             if (modalElement) {
                 console.warn("modalElement", modalElement);
-                setModal(modalElement as any); // If setModal is designed for only one element, you might need to rethink this
+                setModal(modalElement as any);
                 setCanRender(true);
             }
         });
@@ -71,6 +83,17 @@ const DrawerPanel: FC<DrawerProps> = ({
     };
 
     const closeModal = () => {
+        animateCloseModal();
+        document.querySelector<HTMLButtonElement>(".drawer-overlay .close")?.click();
+        if (cancelButtonAction?.canExecute) {
+            cancelButtonAction.execute();
+        }
+    };
+
+    const saveModal = () => {
+        if (saveButtonAction?.canExecute) {
+            saveButtonAction.execute();
+        }
         animateCloseModal();
         document.querySelector<HTMLButtonElement>(".drawer-overlay .close")?.click();
     };
@@ -129,7 +152,28 @@ const DrawerPanel: FC<DrawerProps> = ({
         }, 100);
     }, [canRender]);
 
-    return <div className="convert-Drawer-overlay"></div>;
+    return (
+        <div className="convert-Drawer-overlay">
+            {showFooter && (
+                <div className="drawer-footer mx-dataview-controls">
+                    <button
+                        type="submit"
+                        className="btn mx-button mx-name-actionButton2 btn-success"
+                        onClick={saveModal}
+                    >
+                        {saveButtonTitle}
+                    </button>
+                    <button
+                        type="button"
+                        className="btn mx-button mx-name-actionButton3 btn-default"
+                        onClick={closeModal}
+                    >
+                        {cancelButtonTitle}
+                    </button>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default DrawerPanel;

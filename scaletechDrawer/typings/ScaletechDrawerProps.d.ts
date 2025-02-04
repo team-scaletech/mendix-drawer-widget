@@ -4,6 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
+import { ActionValue } from "mendix";
 
 export type PositionEnum = "top" | "right" | "bottom" | "left";
 
@@ -19,6 +20,11 @@ export interface ScaletechDrawerContainerProps {
     underlayColor: string;
     overlayStyle: OverlayStyleEnum;
     renderUnderlay: boolean;
+    showFooter: boolean;
+    saveName: string;
+    saveButtonAction?: ActionValue;
+    cancelName: string;
+    cancelButtonAction?: ActionValue;
 }
 
 export interface ScaletechDrawerPreviewProps {
@@ -37,4 +43,9 @@ export interface ScaletechDrawerPreviewProps {
     underlayColor: string;
     overlayStyle: OverlayStyleEnum;
     renderUnderlay: boolean;
+    showFooter: boolean;
+    saveName: string;
+    saveButtonAction: {} | null;
+    cancelName: string;
+    cancelButtonAction: {} | null;
 }

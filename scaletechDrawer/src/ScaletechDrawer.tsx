@@ -6,7 +6,18 @@ import { ScaletechDrawerContainerProps } from "../typings/ScaletechDrawerProps";
 import "./ui/ScaletechDrawer.css";
 
 export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
-    const { overlayStyle, position, renderUnderlay, size, underlayColor } = props;
+    const {
+        overlayStyle,
+        position,
+        renderUnderlay,
+        size,
+        underlayColor,
+        showFooter,
+        saveName,
+        cancelName,
+        saveButtonAction,
+        cancelButtonAction
+    } = props;
     return (
         <div>
             <DrawerPanel
@@ -15,6 +26,11 @@ export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
                 renderUnderlay={renderUnderlay}
                 size={size}
                 underlayColor={underlayColor}
+                showFooter={showFooter}
+                saveButtonTitle={saveName}
+                cancelButtonTitle={cancelName}
+                saveButtonAction={saveButtonAction}
+                cancelButtonAction={cancelButtonAction}
             />
         </div>
     );

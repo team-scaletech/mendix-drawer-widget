@@ -1,4 +1,5 @@
 import { ScaletechDrawerPreviewProps } from "../typings/ScaletechDrawerProps";
+import { hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -99,18 +100,18 @@ export type PreviewProps =
     | SelectableProps
     | DatasourceProps;
 
-export function getProperties(
-    _values: ScaletechDrawerPreviewProps,
-    defaultProperties: Properties /* , target: Platform*/
-): Properties {
-    // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
-    /* Example
-    if (values.myProperty === "custom") {
-        delete defaultProperties.properties.myOtherProperty;
-    }
-    */
-    return defaultProperties;
-}
+// export function getProperties(
+//     _values: ScaletechDrawerPreviewProps,
+//     defaultProperties: Properties /* , target: Platform*/
+// ): Properties {
+//     // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
+//     /* Example
+//     if (values.myProperty === "custom") {
+//         delete defaultProperties.properties.myOtherProperty;
+//     }
+//     */
+//     return defaultProperties;
+// }
 
 // export function check(_values: ScaletechDrawerPreviewProps): Problem[] {
 //     const errors: Problem[] = [];
@@ -138,3 +139,17 @@ export function getProperties(
 // export function getCustomCaption(values: ScaletechDrawerPreviewProps, platform: Platform): string {
 //     return "ScaletechDrawer";
 // }
+
+export function getProperties(_values: ScaletechDrawerPreviewProps, defaultProperties: Properties): Properties {
+    if (!_values.showFooter) {
+        hidePropertiesIn(defaultProperties, _values, [
+            "saveButtonAction",
+            "cancelButtonAction",
+            "cancelName",
+            "saveName"
+        ]);
+    }
+
+    // Always return the defaultProperties, even if no changes were made
+    return defaultProperties;
+}
