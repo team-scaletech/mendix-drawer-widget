@@ -145,7 +145,8 @@ body {
     bottom: 0;
     width: 100%;
     background-color: #f1f1f1;
-    padding: 10px;
+    padding: 10px !important;
+    margin: 0px !important;
     text-align: right;
     border-top: 1px solid #ddd;
 }

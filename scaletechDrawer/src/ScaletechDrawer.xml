@@ -27,17 +27,12 @@
             </property>
             <property key="size" type="integer" defaultValue="600">
                 <caption>Drawer size</caption>
-                <description>
-                    In pixels. For horizontal overlays it's a width, for vertical it's used as height.
-                </description>
+                <description>In pixels. For horizontal overlays it's a width, for vertical it's used as height.</description>
             </property>
       
             <property key="underlayColor" type="string" required="false">
                 <caption>Underlay color</caption>
-                <description>
-                    Set the background color for the underlay, for example: green, rgba(255, 0, 0), #BADA55. The
-                    underlay is black when not filled.
-                </description>
+                <description>Set the background color for the underlay, for example: green, rgba(255, 0, 0), #BADA55. The underlay is black when not filled.</description>
             </property>
             </propertyGroup>
             <propertyGroup caption="Advanced">
@@ -57,26 +52,108 @@
         <propertyGroup caption="Footer">
             <property key="showFooter" type="boolean" defaultValue="false">
                     <caption>Show Footer</caption>
-                    <description>Render the region that can be clicked on for also closing the overlay.</description>
+                    <description>Determines whether the footer section is visible in the drawer.</description>
             </property>
             <property key="saveName" type="string" defaultValue='Save'>
-                <caption>save button title</caption>
-                <description>My string setting</description>
+                <caption>Save button title</caption>
+                <description>Specifies the text label displayed on the save button within the drawer.</description>
             </property>
             <property key="saveButtonAction" type="action" required='true'>
                 <caption>Save On click</caption>
-                <description>Action to be performed when button is clicked</description>
+                <description>Defines the action triggered when the save button is clicked.</description>
             </property>
 
             <property key="cancelName" type="string" defaultValue='Cancel'>
-                <caption>cancel button title</caption>
-                <description>My string setting</description>
+                <caption>Cancel button title</caption>
+                <description>Specifies the text label displayed on the cancel button within the drawer.</description>
             </property>
             <property key="cancelButtonAction" type="action">
-                <caption>Cancel On click</caption>
-                <description>Action to be performed when button is clicked</description>
+                <caption>Cancel On click</caption>    
+                <description>Defines the action triggered when the cancel button is clicked.</description>
             </property>
         </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Style">
+        <propertyGroup caption="Header Style">
+           <property key="headerColor" type="string" required="false">
+                <caption>Header color</caption>
+                <description></description>
+            </property>
+            <property key="headerButtonColor" type="string" required="false">
+                <caption>Button color</caption>
+                <description></description>
+            </property>
+            <property key="headerButtonBackgroundColor" type="string" required="false">
+                <caption>Button background color</caption>
+                <description></description>
+            </property>
+            <property key="headerFontSize" type="integer" defaultValue='12'>
+                <caption>Header font size</caption>
+                <description></description>
+            </property>
+             <property key="headerFontWeight" type="integer" defaultValue='100'>
+                <caption>Header font weight</caption>
+                <description></description>
+            </property>
+             <property key="headerFontColor" type="string" required="false">
+                <caption>Header font color </caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+         <propertyGroup caption="Footer Style">
+            <property key="footerBackgroundColor" type="string" required="false">
+                <caption>Footer background color</caption>
+                <description></description>
+            </property>
+            <property key="footerSaveButtonColor" type="string" required="false">
+                <caption>Save button color</caption>
+                <description></description>
+            </property>
+            <property key="SaveButtonFontSize" type="integer" defaultValue='12'>
+                <caption>Save button font size</caption>
+                <description></description>
+            </property>
+             <property key="SaveButtonFontWeight" type="integer" defaultValue='100'>
+                <caption>Save button font weight</caption>
+                <description></description>
+            </property>
+             <property key="SaveButtonFontColor" type="string" required="false">
+                <caption>Save button font color </caption>
+                <description></description>
+            </property>
+            <property key="SaveButtonBorderSize" type="decimal" defaultValue='100'>
+                <caption>Save button border size</caption>
+                <description></description>
+            </property>
+              <property key="SaveButtonBorderColor" type="string" required="false">
+                <caption>Save button border color </caption>
+                <description></description>
+            </property>
+             <property key="footerCloseButtonColor" type="string" required="false">
+                <caption>close button color</caption>
+                <description></description>
+            </property>
+            <property key="closeButtonFontSize" type="integer" defaultValue='12'>
+                <caption>Close button font size</caption>
+                <description></description>
+            </property>
+             <property key="closeButtonFontWeight" type="integer" defaultValue='100'>
+                <caption>Close button font weight</caption>
+                <description></description>
+            </property>
+             <property key="closeButtonFontColor" type="string" required="false">
+                <caption>Close button font color </caption>
+                <description></description>
+            </property>
+            <property key="closeButtonBorderSize" type="decimal" defaultValue='100'>
+                <caption>Close button border size</caption>
+                <description></description>
+            </property>
+              <property key="closeButtonBorderColor" type="string" required="false">
+                <caption>Close button border color </caption>
+                <description></description>
+            </property>
+         </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

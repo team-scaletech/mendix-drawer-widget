@@ -16,7 +16,26 @@ export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
         saveName,
         cancelName,
         saveButtonAction,
-        cancelButtonAction
+        cancelButtonAction,
+        headerColor,
+        headerButtonColor,
+        headerFontColor,
+        headerFontSize,
+        headerFontWeight,
+        headerButtonBackgroundColor,
+        footerBackgroundColor,
+        footerSaveButtonColor,
+        SaveButtonBorderColor,
+        SaveButtonBorderSize,
+        SaveButtonFontColor,
+        SaveButtonFontSize,
+        SaveButtonFontWeight,
+        footerCloseButtonColor,
+        closeButtonBorderColor,
+        closeButtonBorderSize,
+        closeButtonFontColor,
+        closeButtonFontSize,
+        closeButtonFontWeight
     } = props;
     return (
         <div>
@@ -31,6 +50,29 @@ export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
                 cancelButtonTitle={cancelName}
                 saveButtonAction={saveButtonAction}
                 cancelButtonAction={cancelButtonAction}
+                headerStyle={{
+                    headerColor,
+                    headerButtonColor,
+                    headerFontColor,
+                    headerFontSize,
+                    headerFontWeight,
+                    headerButtonBackgroundColor
+                }}
+                footerStyle={{
+                    footerBackgroundColor,
+                    footerSaveButtonColor,
+                    SaveButtonBorderColor,
+                    SaveButtonBorderSize,
+                    SaveButtonFontColor,
+                    SaveButtonFontSize,
+                    SaveButtonFontWeight,
+                    footerCloseButtonColor,
+                    closeButtonBorderColor,
+                    closeButtonBorderSize,
+                    closeButtonFontColor,
+                    closeButtonFontSize,
+                    closeButtonFontWeight
+                }}
             />
         </div>
     );

@@ -17,6 +17,31 @@ interface DrawerProps {
     cancelButtonTitle?: string;
     saveButtonAction?: ActionValue;
     cancelButtonAction?: ActionValue;
+    headerStyle?: HeaderStyle;
+    footerStyle?: FooterStyle;
+}
+interface HeaderStyle {
+    headerColor?: string;
+    headerButtonColor?: string;
+    headerButtonBackgroundColor?: string;
+    headerFontColor?: string;
+    headerFontSize?: number;
+    headerFontWeight?: number;
+}
+interface FooterStyle {
+    footerBackgroundColor?: string;
+    footerSaveButtonColor?: string;
+    SaveButtonBorderColor?: string;
+    SaveButtonBorderSize?: Big;
+    SaveButtonFontColor?: string;
+    SaveButtonFontSize?: number;
+    SaveButtonFontWeight?: number;
+    footerCloseButtonColor?: string;
+    closeButtonBorderColor?: string;
+    closeButtonBorderSize?: Big;
+    closeButtonFontColor?: string;
+    closeButtonFontSize?: number;
+    closeButtonFontWeight?: number;
 }
 
 const DrawerPanel: FC<DrawerProps> = ({
@@ -30,7 +55,9 @@ const DrawerPanel: FC<DrawerProps> = ({
     saveButtonTitle,
     cancelButtonTitle,
     saveButtonAction,
-    cancelButtonAction
+    cancelButtonAction,
+    headerStyle,
+    footerStyle
 }) => {
     const [canRender, setCanRender] = useState(false);
     const [modal, setModal] = useState<HTMLElement | null>(null);
@@ -42,7 +69,6 @@ const DrawerPanel: FC<DrawerProps> = ({
         modalElements.forEach(element => {
             const modalElement = element.closest(".modal-dialog");
             if (modalElement) {
-                console.warn("modalElement", modalElement);
                 setModal(modalElement as any);
                 setCanRender(true);
             }
@@ -61,6 +87,30 @@ const DrawerPanel: FC<DrawerProps> = ({
             document.documentElement.style.setProperty("--underlay-color", underlayColor);
         }
     }, [underlayColor]);
+
+    useEffect(() => {
+        const modalHeader = document.querySelector(".modal-header") as HTMLElement | null;
+        // Target the button inside the modal header
+        const button = document.querySelector(".modal-header button") as HTMLElement | null;
+        const heading = document.querySelector(".modal-header h4") as HTMLElement | null;
+
+        // Add styles for the button
+        if (button) {
+            button.style.backgroundColor = `${headerStyle?.headerButtonBackgroundColor}`;
+            button.style.color = `${headerStyle?.headerButtonColor}`;
+        }
+
+        // Add styles for the heading
+        if (heading) {
+            heading.style.fontSize = `${headerStyle?.headerFontSize}px`;
+            heading.style.fontWeight = `${headerStyle?.headerFontWeight}`;
+            heading.style.color = `${headerStyle?.headerFontColor}`;
+        }
+
+        if (modalHeader) {
+            modalHeader.style.backgroundColor = `${headerStyle?.headerColor}`; // Replace with your preferred color
+        }
+    }, [headerStyle]);
 
     const removeUnderlay = () => {
         document.querySelector(".drawer-underlay.old")?.classList.remove("visible");
@@ -155,10 +205,20 @@ const DrawerPanel: FC<DrawerProps> = ({
     return (
         <div className="convert-Drawer-overlay">
             {showFooter && (
-                <div className="drawer-footer mx-dataview-controls">
+                <div
+                    className="drawer-footer mx-dataview-controls"
+                    style={{ backgroundColor: footerStyle?.footerBackgroundColor }}
+                >
                     <button
                         type="submit"
                         className="btn mx-button mx-name-actionButton2 btn-success"
+                        style={{
+                            backgroundColor: footerStyle?.footerSaveButtonColor,
+                            color: footerStyle?.SaveButtonFontColor,
+                            fontSize: `${footerStyle?.SaveButtonFontSize}px`,
+                            fontWeight: footerStyle?.SaveButtonFontWeight,
+                            border: `${footerStyle?.SaveButtonBorderSize}px solid ${footerStyle?.SaveButtonBorderColor}`
+                        }}
                         onClick={saveModal}
                     >
                         {saveButtonTitle}
@@ -167,6 +227,13 @@ const DrawerPanel: FC<DrawerProps> = ({
                         type="button"
                         className="btn mx-button mx-name-actionButton3 btn-default"
                         onClick={closeModal}
+                        style={{
+                            backgroundColor: footerStyle?.footerBackgroundColor,
+                            color: footerStyle?.closeButtonFontColor,
+                            fontSize: `${footerStyle?.closeButtonFontSize}px`,
+                            fontWeight: footerStyle?.closeButtonFontWeight,
+                            border: `${footerStyle?.closeButtonBorderSize}px solid ${footerStyle?.closeButtonBorderColor}`
+                        }}
                     >
                         {cancelButtonTitle}
                     </button>

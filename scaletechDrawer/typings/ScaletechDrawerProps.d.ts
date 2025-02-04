@@ -5,6 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionValue } from "mendix";
+import { Big } from "big.js";
 
 export type PositionEnum = "top" | "right" | "bottom" | "left";
 
@@ -25,6 +26,25 @@ export interface ScaletechDrawerContainerProps {
     saveButtonAction?: ActionValue;
     cancelName: string;
     cancelButtonAction?: ActionValue;
+    headerColor: string;
+    headerButtonColor: string;
+    headerButtonBackgroundColor: string;
+    headerFontSize: number;
+    headerFontWeight: number;
+    headerFontColor: string;
+    footerBackgroundColor: string;
+    footerSaveButtonColor: string;
+    SaveButtonFontSize: number;
+    SaveButtonFontWeight: number;
+    SaveButtonFontColor: string;
+    SaveButtonBorderSize: Big;
+    SaveButtonBorderColor: string;
+    footerCloseButtonColor: string;
+    closeButtonFontSize: number;
+    closeButtonFontWeight: number;
+    closeButtonFontColor: string;
+    closeButtonBorderSize: Big;
+    closeButtonBorderColor: string;
 }
 
 export interface ScaletechDrawerPreviewProps {
@@ -48,4 +68,23 @@ export interface ScaletechDrawerPreviewProps {
     saveButtonAction: {} | null;
     cancelName: string;
     cancelButtonAction: {} | null;
+    headerColor: string;
+    headerButtonColor: string;
+    headerButtonBackgroundColor: string;
+    headerFontSize: number | null;
+    headerFontWeight: number | null;
+    headerFontColor: string;
+    footerBackgroundColor: string;
+    footerSaveButtonColor: string;
+    SaveButtonFontSize: number | null;
+    SaveButtonFontWeight: number | null;
+    SaveButtonFontColor: string;
+    SaveButtonBorderSize: number | null;
+    SaveButtonBorderColor: string;
+    footerCloseButtonColor: string;
+    closeButtonFontSize: number | null;
+    closeButtonFontWeight: number | null;
+    closeButtonFontColor: string;
+    closeButtonBorderSize: number | null;
+    closeButtonBorderColor: string;
 }
