@@ -12,68 +12,34 @@ export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
         renderUnderlay,
         size,
         underlayColor,
-        showFooter,
-        saveName,
-        cancelName,
-        saveButtonAction,
-        cancelButtonAction,
         headerColor,
         headerButtonColor,
         headerFontColor,
         headerFontSize,
         headerFontWeight,
         headerButtonBackgroundColor,
-        footerBackgroundColor,
-        footerSaveButtonColor,
-        SaveButtonBorderColor,
-        SaveButtonBorderSize,
-        SaveButtonFontColor,
-        SaveButtonFontSize,
-        SaveButtonFontWeight,
-        footerCloseButtonColor,
-        closeButtonBorderColor,
-        closeButtonBorderSize,
-        closeButtonFontColor,
-        closeButtonFontSize,
-        closeButtonFontWeight
+        content,
+        footer,
+        isFooter
     } = props;
     return (
-        <div>
-            <DrawerPanel
-                overlayStyle={overlayStyle}
-                position={position}
-                renderUnderlay={renderUnderlay}
-                size={size}
-                underlayColor={underlayColor}
-                showFooter={showFooter}
-                saveButtonTitle={saveName}
-                cancelButtonTitle={cancelName}
-                saveButtonAction={saveButtonAction}
-                cancelButtonAction={cancelButtonAction}
-                headerStyle={{
-                    headerColor,
-                    headerButtonColor,
-                    headerFontColor,
-                    headerFontSize,
-                    headerFontWeight,
-                    headerButtonBackgroundColor
-                }}
-                footerStyle={{
-                    footerBackgroundColor,
-                    footerSaveButtonColor,
-                    SaveButtonBorderColor,
-                    SaveButtonBorderSize,
-                    SaveButtonFontColor,
-                    SaveButtonFontSize,
-                    SaveButtonFontWeight,
-                    footerCloseButtonColor,
-                    closeButtonBorderColor,
-                    closeButtonBorderSize,
-                    closeButtonFontColor,
-                    closeButtonFontSize,
-                    closeButtonFontWeight
-                }}
-            />
-        </div>
+        <DrawerPanel
+            overlayStyle={overlayStyle}
+            position={position}
+            renderUnderlay={renderUnderlay}
+            size={size}
+            underlayColor={underlayColor}
+            headerStyle={{
+                headerColor,
+                headerButtonColor,
+                headerFontColor,
+                headerFontSize,
+                headerFontWeight,
+                headerButtonBackgroundColor
+            }}
+            content={content}
+            footer={footer}
+            isFooter={isFooter}
+        />
     );
 };

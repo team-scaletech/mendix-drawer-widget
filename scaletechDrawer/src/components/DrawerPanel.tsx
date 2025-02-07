@@ -1,7 +1,5 @@
-import { createElement, FC, useEffect, useState } from "react";
+import { createElement, FC, ReactNode, useEffect, useState } from "react";
 import { OverlayStyleEnum, PositionEnum } from "typings/ScaletechDrawerProps";
-
-import { ActionValue } from "mendix";
 
 import "../ui/ScaletechDrawer.css";
 
@@ -13,12 +11,10 @@ interface DrawerProps {
     showFooter?: boolean;
     size?: number;
     underlayColor?: string;
-    saveButtonTitle?: string;
-    cancelButtonTitle?: string;
-    saveButtonAction?: ActionValue;
-    cancelButtonAction?: ActionValue;
     headerStyle?: HeaderStyle;
-    footerStyle?: FooterStyle;
+    content?: ReactNode;
+    footer?: ReactNode;
+    isFooter?: boolean;
 }
 interface HeaderStyle {
     headerColor?: string;
@@ -28,36 +24,18 @@ interface HeaderStyle {
     headerFontSize?: number;
     headerFontWeight?: number;
 }
-interface FooterStyle {
-    footerBackgroundColor?: string;
-    footerSaveButtonColor?: string;
-    SaveButtonBorderColor?: string;
-    SaveButtonBorderSize?: Big;
-    SaveButtonFontColor?: string;
-    SaveButtonFontSize?: number;
-    SaveButtonFontWeight?: number;
-    footerCloseButtonColor?: string;
-    closeButtonBorderColor?: string;
-    closeButtonBorderSize?: Big;
-    closeButtonFontColor?: string;
-    closeButtonFontSize?: number;
-    closeButtonFontWeight?: number;
-}
 
 const DrawerPanel: FC<DrawerProps> = ({
     overlayStyle,
     position = "right",
     renderUnderlay = true,
     showHeader = true,
-    showFooter = true,
     size = 300,
     underlayColor,
-    saveButtonTitle,
-    cancelButtonTitle,
-    saveButtonAction,
-    cancelButtonAction,
     headerStyle,
-    footerStyle
+    content,
+    footer,
+    isFooter
 }) => {
     const [canRender, setCanRender] = useState(false);
     const [modal, setModal] = useState<HTMLElement | null>(null);
@@ -65,6 +43,12 @@ const DrawerPanel: FC<DrawerProps> = ({
 
     useEffect(() => {
         const modalElements = document.querySelectorAll<HTMLElement>(".convert-Drawer-overlay");
+        const footerClass = document.querySelector(".drawer-footer") as HTMLElement | null;
+        const footerWrapperClass = document.querySelector(".mx-dataview-controls") as HTMLElement | null;
+
+        if (footerClass && footerWrapperClass) {
+            footerWrapperClass.classList.add("custom-footer-styling");
+        }
 
         modalElements.forEach(element => {
             const modalElement = element.closest(".modal-dialog");
@@ -135,17 +119,6 @@ const DrawerPanel: FC<DrawerProps> = ({
     const closeModal = () => {
         animateCloseModal();
         document.querySelector<HTMLButtonElement>(".drawer-overlay .close")?.click();
-        if (cancelButtonAction?.canExecute) {
-            cancelButtonAction.execute();
-        }
-    };
-
-    const saveModal = () => {
-        if (saveButtonAction?.canExecute) {
-            saveButtonAction.execute();
-        }
-        animateCloseModal();
-        document.querySelector<HTMLButtonElement>(".drawer-overlay .close")?.click();
     };
 
     const generateUnderlay = () => {
@@ -203,42 +176,9 @@ const DrawerPanel: FC<DrawerProps> = ({
     }, [canRender]);
 
     return (
-        <div className="convert-Drawer-overlay">
-            {showFooter && (
-                <div
-                    className="drawer-footer mx-dataview-controls"
-                    style={{ backgroundColor: footerStyle?.footerBackgroundColor }}
-                >
-                    <button
-                        type="submit"
-                        className="btn mx-button mx-name-actionButton2 btn-success"
-                        style={{
-                            backgroundColor: footerStyle?.footerSaveButtonColor,
-                            color: footerStyle?.SaveButtonFontColor,
-                            fontSize: `${footerStyle?.SaveButtonFontSize}px`,
-                            fontWeight: footerStyle?.SaveButtonFontWeight,
-                            border: `${footerStyle?.SaveButtonBorderSize}px solid ${footerStyle?.SaveButtonBorderColor}`
-                        }}
-                        onClick={saveModal}
-                    >
-                        {saveButtonTitle}
-                    </button>
-                    <button
-                        type="button"
-                        className="btn mx-button mx-name-actionButton3 btn-default"
-                        onClick={closeModal}
-                        style={{
-                            backgroundColor: footerStyle?.footerBackgroundColor,
-                            color: footerStyle?.closeButtonFontColor,
-                            fontSize: `${footerStyle?.closeButtonFontSize}px`,
-                            fontWeight: footerStyle?.closeButtonFontWeight,
-                            border: `${footerStyle?.closeButtonBorderSize}px solid ${footerStyle?.closeButtonBorderColor}`
-                        }}
-                    >
-                        {cancelButtonTitle}
-                    </button>
-                </div>
-            )}
+        <div className="drawer-wrapper">
+            <div className="convert-Drawer-overlay">{content}</div>
+            {isFooter && <div className="footer-section">{footer}</div>}
         </div>
     );
 };
