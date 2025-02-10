@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="scaletech.scaletechdrawer.ScaletechDrawer"
+    pluginWidget="true"
+    needsEntityContext="true"
+    offlineCapable="true"
+    supportedPlatform="Web"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Scaletech Drawer</name>
+    <description>My widget description</description>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="General">
+        <propertyGroup caption="General">
+            <property key="content" type="widgets" required="false">
+                <caption>Content</caption>
+                <description>Defines the main content displayed within the drawer.</description>
+            </property>
+              <property key="footer" type="widgets" required="false">
+                <caption>Content</caption>
+                <description>Defines additional footer content for the drawer.</description>
+            </property>
+            <property key="position" type="enumeration" defaultValue="right">
+                <caption>Drawer position</caption>
+                <description>Specifies the orientation for the drawer.</description>
+                <enumerationValues>
+                    <enumerationValue key="top">top</enumerationValue>
+                    <enumerationValue key="right">right</enumerationValue>
+                    <enumerationValue key="bottom">bottom</enumerationValue>
+                    <enumerationValue key="left">left</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="size" type="integer" defaultValue="600">
+                <caption>Drawer size</caption>
+                <description>Sets the size of the drawer in pixels.</description>
+            </property>
+                <property key="isFooter" type="boolean" defaultValue="true">
+                <caption>Show footer</caption>
+                <description>Determines whether to display the footer in the drawer.</description>
+            </property>
+            <property key="underlayColor" type="string" required="false">
+                <caption>Underlay color</caption>
+                <description>Specifies the color of the underlay when the drawer is active.</description>
+            </property>
+            </propertyGroup>
+            <propertyGroup caption="Advanced">
+                <property key="overlayStyle" type="enumeration" defaultValue="over">
+                    <caption>Drawer style</caption>
+                    <description> Specifies the drawer behavior in relation to content.</description>
+                    <enumerationValues>
+                        <enumerationValue key="over">Overlay</enumerationValue>
+                        <enumerationValue key="push">Push content aside</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="renderUnderlay" type="boolean" defaultValue="true">
+                    <caption>Render underlay?</caption>
+                    <description>Determines whether to render an underlay when the drawer is active.</description>
+                </property>
+        </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Style">
+        <propertyGroup caption="Header Style">
+           <property key="headerColor" type="string" required="false">
+                <caption>Header color</caption>
+                <description>Sets the background color of the drawer header.</description>
+            </property>
+            <property key="headerButtonColor" type="string" required="false">
+                <caption>Button color</caption>
+                <description>Specifies the color of buttons in the drawer header.</description>
+            </property>
+            <property key="headerButtonBackgroundColor" type="string" required="false">
+                <caption>Button background color</caption>
+                <description>Sets the background color of header buttons.</description>
+            </property>
+            <property key="headerFontSize" type="integer" defaultValue='12'>
+                <caption>Header font size</caption>
+                <description>Defines the font size for the header text.</description>
+            </property>
+             <property key="headerFontWeight" type="integer" defaultValue='100'>
+                <caption>Header font weight</caption>
+                <description>Specifies the font weight for the header text.</description>
+            </property>
+             <property key="headerFontColor" type="string" required="false">
+                <caption>Header font color </caption>
+                <description> Sets the font color for the header text.</description>
+            </property>
+        </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

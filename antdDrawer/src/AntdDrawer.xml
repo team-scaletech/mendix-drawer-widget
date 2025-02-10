@@ -16,7 +16,7 @@
         <propertyGroup caption="General">
             <property key="nestedWidget" type="widgets" required="false">
                 <caption>Content</caption>
-                <description>Content of a box</description>
+                <description />
             </property>
             <property key="drawerPosition" type="enumeration" defaultValue="right">
                 <caption>Drawer Position</caption>
