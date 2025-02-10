@@ -20,7 +20,9 @@ export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
         headerButtonBackgroundColor,
         content,
         footer,
-        isFooter
+        isFooter,
+        style,
+        class: customClass
     } = props;
     return (
         <DrawerPanel
