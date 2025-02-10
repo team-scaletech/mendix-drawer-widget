@@ -17,15 +17,15 @@
         <propertyGroup caption="General">
             <property key="content" type="widgets" required="false">
                 <caption>Content</caption>
-                <description>Content of a box</description>
+                <description>Defines the main content displayed within the drawer.</description>
             </property>
               <property key="footer" type="widgets" required="false">
                 <caption>Content</caption>
-                <description>Content of a box</description>
+                <description>Defines additional footer content for the drawer.</description>
             </property>
             <property key="position" type="enumeration" defaultValue="right">
                 <caption>Drawer position</caption>
-                <description>Orientation for the Drawer.</description>
+                <description>Specifies the orientation for the drawer.</description>
                 <enumerationValues>
                     <enumerationValue key="top">top</enumerationValue>
                     <enumerationValue key="right">right</enumerationValue>
@@ -35,21 +35,21 @@
             </property>
             <property key="size" type="integer" defaultValue="600">
                 <caption>Drawer size</caption>
-                <description>In pixels. For horizontal overlays it's a width, for vertical it's used as height.</description>
+                <description>Sets the size of the drawer in pixels.</description>
             </property>
                 <property key="isFooter" type="boolean" defaultValue="true">
                 <caption>Show footer</caption>
-                <description>My boolean setting</description>
+                <description>Determines whether to display the footer in the drawer.</description>
             </property>
             <property key="underlayColor" type="string" required="false">
                 <caption>Underlay color</caption>
-                <description>Set the background color for the underlay, for example: green, rgba(255, 0, 0), #BADA55. The underlay is black when not filled.</description>
+                <description>Specifies the color of the underlay when the drawer is active.</description>
             </property>
             </propertyGroup>
             <propertyGroup caption="Advanced">
                 <property key="overlayStyle" type="enumeration" defaultValue="over">
                     <caption>Drawer style</caption>
-                    <description>The way that the Drawer comes in.</description>
+                    <description> Specifies the drawer behavior in relation to content.</description>
                     <enumerationValues>
                         <enumerationValue key="over">Overlay</enumerationValue>
                         <enumerationValue key="push">Push content aside</enumerationValue>
@@ -57,7 +57,7 @@
                 </property>
                 <property key="renderUnderlay" type="boolean" defaultValue="true">
                     <caption>Render underlay?</caption>
-                    <description>Render the region that can be clicked on for also closing the overlay.</description>
+                    <description>Determines whether to render an underlay when the drawer is active.</description>
                 </property>
         </propertyGroup>
         </propertyGroup>
@@ -65,27 +65,27 @@
         <propertyGroup caption="Header Style">
            <property key="headerColor" type="string" required="false">
                 <caption>Header color</caption>
-                <description></description>
+                <description>Sets the background color of the drawer header.</description>
             </property>
             <property key="headerButtonColor" type="string" required="false">
                 <caption>Button color</caption>
-                <description></description>
+                <description>Specifies the color of buttons in the drawer header.</description>
             </property>
             <property key="headerButtonBackgroundColor" type="string" required="false">
                 <caption>Button background color</caption>
-                <description></description>
+                <description>Sets the background color of header buttons.</description>
             </property>
             <property key="headerFontSize" type="integer" defaultValue='12'>
                 <caption>Header font size</caption>
-                <description></description>
+                <description>Defines the font size for the header text.</description>
             </property>
              <property key="headerFontWeight" type="integer" defaultValue='100'>
                 <caption>Header font weight</caption>
-                <description></description>
+                <description>Specifies the font weight for the header text.</description>
             </property>
              <property key="headerFontColor" type="string" required="false">
                 <caption>Header font color </caption>
-                <description></description>
+                <description> Sets the font color for the header text.</description>
             </property>
         </propertyGroup>
         </propertyGroup>

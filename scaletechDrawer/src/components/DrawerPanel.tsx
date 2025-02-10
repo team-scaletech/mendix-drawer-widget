@@ -1,4 +1,4 @@
-import { createElement, FC, ReactNode, useEffect, useState } from "react";
+import { createElement, CSSProperties, FC, ReactNode, useEffect, useState } from "react";
 import { OverlayStyleEnum, PositionEnum } from "typings/ScaletechDrawerProps";
 
 import "../ui/ScaletechDrawer.css";
@@ -15,6 +15,8 @@ interface DrawerProps {
     content?: ReactNode;
     footer?: ReactNode;
     isFooter?: boolean;
+    className?: string;
+    style?: CSSProperties;
 }
 interface HeaderStyle {
     headerColor?: string;
@@ -35,7 +37,9 @@ const DrawerPanel: FC<DrawerProps> = ({
     headerStyle,
     content,
     footer,
-    isFooter
+    isFooter,
+    style,
+    className
 }) => {
     const [canRender, setCanRender] = useState(false);
     const [modal, setModal] = useState<HTMLElement | null>(null);
@@ -176,7 +180,7 @@ const DrawerPanel: FC<DrawerProps> = ({
     }, [canRender]);
 
     return (
-        <div className="drawer-wrapper">
+        <div className={`drawer-wrapper ${className}`} style={style}>
             <div className="convert-Drawer-overlay">{content}</div>
             {isFooter && <div className="footer-section">{footer}</div>}
         </div>
