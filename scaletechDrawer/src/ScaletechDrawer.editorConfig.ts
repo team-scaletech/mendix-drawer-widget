@@ -1,4 +1,5 @@
 import { ScaletechDrawerPreviewProps } from "../typings/ScaletechDrawerProps";
+import { hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -109,7 +110,9 @@ export function getProperties(
         delete defaultProperties.properties.myOtherProperty;
     }
     */
-
+    if (!_values.isFooter) {
+        hidePropertiesIn(defaultProperties, _values, ["footer"]);
+    }
     return defaultProperties;
 }
 
