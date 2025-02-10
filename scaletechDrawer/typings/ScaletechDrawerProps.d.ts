@@ -3,8 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix Widgets Framework Team
  */
-import { CSSProperties } from "react";
-import { ActionValue } from "mendix";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 
 export type PositionEnum = "top" | "right" | "bottom" | "left";
 
@@ -15,15 +14,20 @@ export interface ScaletechDrawerContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    content?: ReactNode;
+    footer?: ReactNode;
     position: PositionEnum;
     size: number;
-    showHeader: boolean;
-    closeButtonClass: string;
+    isFooter: boolean;
     underlayColor: string;
-    closeAction?: ActionValue;
-    shouldClosePage: boolean;
     overlayStyle: OverlayStyleEnum;
     renderUnderlay: boolean;
+    headerColor: string;
+    headerButtonColor: string;
+    headerButtonBackgroundColor: string;
+    headerFontSize: number;
+    headerFontWeight: number;
+    headerFontColor: string;
 }
 
 export interface ScaletechDrawerPreviewProps {
@@ -37,13 +41,18 @@ export interface ScaletechDrawerPreviewProps {
     readOnly: boolean;
     renderMode: "design" | "xray" | "structure";
     translate: (text: string) => string;
+    content: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
+    footer: { widgetCount: number; renderer: ComponentType<{ children: ReactNode; caption?: string }> };
     position: PositionEnum;
     size: number | null;
-    showHeader: boolean;
-    closeButtonClass: string;
+    isFooter: boolean;
     underlayColor: string;
-    closeAction: {} | null;
-    shouldClosePage: boolean;
     overlayStyle: OverlayStyleEnum;
     renderUnderlay: boolean;
+    headerColor: string;
+    headerButtonColor: string;
+    headerButtonBackgroundColor: string;
+    headerFontSize: number | null;
+    headerFontWeight: number | null;
+    headerFontColor: string;
 }

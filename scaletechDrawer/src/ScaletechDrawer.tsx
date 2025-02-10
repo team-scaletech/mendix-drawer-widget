@@ -7,29 +7,39 @@ import "./ui/ScaletechDrawer.css";
 
 export const ScaletechDrawer: FC<ScaletechDrawerContainerProps> = props => {
     const {
-        closeAction,
-        closeButtonClass,
         overlayStyle,
         position,
         renderUnderlay,
-        shouldClosePage,
-        showHeader,
         size,
-        underlayColor
+        underlayColor,
+        headerColor,
+        headerButtonColor,
+        headerFontColor,
+        headerFontSize,
+        headerFontWeight,
+        headerButtonBackgroundColor,
+        content,
+        footer,
+        isFooter
     } = props;
     return (
-        <div>
-            <DrawerPanel
-                closeAction={closeAction}
-                closeButtonClass={closeButtonClass}
-                overlayStyle={overlayStyle}
-                position={position}
-                renderUnderlay={renderUnderlay}
-                shouldClosePage={shouldClosePage}
-                showHeader={showHeader}
-                size={size}
-                underlayColor={underlayColor}
-            />
-        </div>
+        <DrawerPanel
+            overlayStyle={overlayStyle}
+            position={position}
+            renderUnderlay={renderUnderlay}
+            size={size}
+            underlayColor={underlayColor}
+            headerStyle={{
+                headerColor,
+                headerButtonColor,
+                headerFontColor,
+                headerFontSize,
+                headerFontWeight,
+                headerButtonBackgroundColor
+            }}
+            content={content}
+            footer={footer}
+            isFooter={isFooter}
+        />
     );
 };

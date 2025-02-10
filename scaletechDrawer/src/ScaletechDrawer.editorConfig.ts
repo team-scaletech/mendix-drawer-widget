@@ -1,4 +1,5 @@
 import { ScaletechDrawerPreviewProps } from "../typings/ScaletechDrawerProps";
+import { hidePropertiesIn } from "@mendix/pluggable-widgets-tools";
 
 export type Platform = "web" | "desktop";
 
@@ -109,6 +110,9 @@ export function getProperties(
         delete defaultProperties.properties.myOtherProperty;
     }
     */
+    if (!_values.isFooter) {
+        hidePropertiesIn(defaultProperties, _values, ["footer"]);
+    }
     return defaultProperties;
 }
 
@@ -137,4 +141,19 @@ export function getProperties(
 
 // export function getCustomCaption(values: ScaletechDrawerPreviewProps, platform: Platform): string {
 //     return "ScaletechDrawer";
+// }
+
+// export function getPreview(values: ScaletechDrawerPreviewProps): PreviewProps {
+//     const readOnlyColor = "lightgray"; // Color when widget is readOnly
+//     const defaultColor = values.isFooter ? "#333333" : "#FFFFFF";
+
+//     return {
+//         type: "Container",
+//         borders: true,
+//         borderWidth: 1,
+//         borderRadius: 2,
+//         backgroundColor: values.isFooter ? readOnlyColor : defaultColor, // Apply color change based on readOnly state
+//         padding: 0,
+//         children: []
+//     };
 // }

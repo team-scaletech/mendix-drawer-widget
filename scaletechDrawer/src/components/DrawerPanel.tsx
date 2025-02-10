@@ -1,40 +1,69 @@
-import { createElement, FC, useEffect, useState } from "react";
+import { createElement, FC, ReactNode, useEffect, useState } from "react";
+import { OverlayStyleEnum, PositionEnum } from "typings/ScaletechDrawerProps";
+
 import "../ui/ScaletechDrawer.css";
-import { ActionValue } from "mendix";
 
 interface DrawerProps {
-    closeAction?: ActionValue;
-    closeButtonClass?: string;
-    overlayStyle?: string;
-    position?: string;
+    overlayStyle?: OverlayStyleEnum;
+    position?: PositionEnum;
     renderUnderlay?: boolean;
-    shouldClosePage?: boolean;
     showHeader?: boolean;
+    showFooter?: boolean;
     size?: number;
     underlayColor?: string;
+    headerStyle?: HeaderStyle;
+    content?: ReactNode;
+    footer?: ReactNode;
+    isFooter?: boolean;
+}
+interface HeaderStyle {
+    headerColor?: string;
+    headerButtonColor?: string;
+    headerButtonBackgroundColor?: string;
+    headerFontColor?: string;
+    headerFontSize?: number;
+    headerFontWeight?: number;
 }
 
 const DrawerPanel: FC<DrawerProps> = ({
-    closeAction,
-    closeButtonClass,
-    overlayStyle = "default",
-    position = "left",
+    overlayStyle,
+    position = "right",
     renderUnderlay = true,
-    shouldClosePage = false,
     showHeader = true,
     size = 300,
-    underlayColor
+    underlayColor,
+    headerStyle,
+    content,
+    footer,
+    isFooter
 }) => {
     const [canRender, setCanRender] = useState(false);
     const [modal, setModal] = useState<HTMLElement | null>(null);
     const page = document.querySelector<HTMLElement>(".mx-page");
 
     useEffect(() => {
-        const modalElement = document.querySelector<HTMLElement>(".convert-Drawer-overlay")?.closest(".modal-dialog");
-        if (modalElement) {
-            setModal(modalElement as any);
-            setCanRender(true);
+        const modalElements = document.querySelectorAll<HTMLElement>(".convert-Drawer-overlay");
+        const footerClass = document.querySelector(".drawer-footer") as HTMLElement | null;
+        const footerWrapperClass = document.querySelector(".mx-dataview-controls") as HTMLElement | null;
+
+        if (footerClass && footerWrapperClass) {
+            footerWrapperClass.classList.add("custom-footer-styling");
         }
+
+        modalElements.forEach(element => {
+            const modalElement = element.closest(".modal-dialog");
+            if (modalElement) {
+                setModal(modalElement as any);
+                setCanRender(true);
+            }
+        });
+
+        const elements = document.querySelectorAll(".close");
+        elements.forEach(element => element.addEventListener("click", animateCloseModal));
+
+        return () => {
+            elements.forEach(element => element.removeEventListener("click", animateCloseModal));
+        };
     }, []);
 
     useEffect(() => {
@@ -43,16 +72,34 @@ const DrawerPanel: FC<DrawerProps> = ({
         }
     }, [underlayColor]);
 
-    const addEventListeners = (selector: string, event: string, handler: () => void) => {
-        document.querySelectorAll(selector).forEach(element => {
-            element.addEventListener(event, handler);
-        });
-    };
+    useEffect(() => {
+        const modalHeader = document.querySelector(".modal-header") as HTMLElement | null;
+        // Target the button inside the modal header
+        const button = document.querySelector(".modal-header button") as HTMLElement | null;
+        const heading = document.querySelector(".modal-header h4") as HTMLElement | null;
+
+        // Add styles for the button
+        if (button) {
+            button.style.backgroundColor = `${headerStyle?.headerButtonBackgroundColor}`;
+            button.style.color = `${headerStyle?.headerButtonColor}`;
+        }
+
+        // Add styles for the heading
+        if (heading) {
+            heading.style.fontSize = `${headerStyle?.headerFontSize}px`;
+            heading.style.fontWeight = `${headerStyle?.headerFontWeight}`;
+            heading.style.color = `${headerStyle?.headerFontColor}`;
+        }
+
+        if (modalHeader) {
+            modalHeader.style.backgroundColor = `${headerStyle?.headerColor}`; // Replace with your preferred color
+        }
+    }, [headerStyle]);
 
     const removeUnderlay = () => {
-        document.querySelector(".popup-underlay.old")?.classList.remove("visible");
+        document.querySelector(".drawer-underlay.old")?.classList.remove("visible");
         setTimeout(() => {
-            document.querySelector(".mx-page > .popup-underlay")?.remove();
+            document.querySelector(".mx-page > .drawer-underlay")?.remove();
         }, 300);
     };
 
@@ -71,72 +118,37 @@ const DrawerPanel: FC<DrawerProps> = ({
 
     const closeModal = () => {
         animateCloseModal();
-        if (closeAction?.canExecute) {
-            closeAction.execute();
-        } else {
-            document.querySelector<HTMLButtonElement>(".popup-overlay .close")?.click();
-        }
+        document.querySelector<HTMLButtonElement>(".drawer-overlay .close")?.click();
     };
 
     const generateUnderlay = () => {
-        const underlayHtml = '<div class="popup-underlay"></div>';
+        const underlayHtml = '<div class="drawer-underlay"></div>';
         if (overlayStyle === "push") {
             page?.insertAdjacentHTML("afterbegin", underlayHtml);
         } else {
             modal?.insertAdjacentHTML("beforeend", underlayHtml);
         }
-        const underlay = document.querySelector(".popup-underlay:not(.old)");
+        const underlay = document.querySelector(".drawer-underlay:not(.old)");
         underlay?.classList.add("old");
         underlay?.addEventListener("click", closeModal);
         return underlay;
     };
 
-    const generateCloseButton = () => {
-        if (showHeader && shouldClosePage) {
-            modal
-                ?.querySelector(".modal-content")
-                ?.insertAdjacentHTML("afterbegin", '<div class="popup-overlay__closebutton"></div>');
-            addEventListeners(".popup-overlay__closebutton", "click", closeModal);
-        }
-    };
-    const linkCloseButtons = () => {
-        if (!closeButtonClass) return; // Ensure the class is defined before using
-
-        document.querySelectorAll(`.${closeButtonClass}`).forEach(closeBtn => {
-            if (shouldClosePage) {
-                closeBtn?.addEventListener("click", closeModal);
-            } else {
-                closeBtn?.addEventListener("click", animateCloseModal);
-            }
-        });
-    };
-    const generateCloseBtn = () => {
-        if (showHeader && shouldClosePage) {
-            modal
-                ?.querySelector(".modal-content")
-                ?.insertAdjacentHTML("afterbegin", '<div class="popup-overlay__closebutton"></div>');
-            document.querySelector(".popup-overlay__closebutton")?.addEventListener("click", closeModal);
-        }
-    };
-
     useEffect(() => {
         if (!canRender) return;
 
-        modal?.classList.add("popup-overlay", `popup-overlay--${position}`);
+        modal?.classList.add("drawer-overlay", `drawer-overlay--${position}`);
         if (overlayStyle === "push") page?.classList.add("mx-page--push");
 
         setTimeout(() => {
             if (["left", "right"].includes(position)) modal!.style.width = `${size}px`;
             if (["top", "bottom"].includes(position)) modal!.style.height = `${size}px`;
 
-            if (!showHeader) modal?.classList.add("popup-overlay--remove-header");
+            if (!showHeader) modal?.classList.add("drawer-overlay--remove-header");
 
             const underlay = generateUnderlay();
-            generateCloseButton();
 
             setTimeout(() => {
-                generateCloseBtn();
-                setTimeout(() => linkCloseButtons(), 300);
                 if (renderUnderlay) {
                     underlay?.classList.add("visible");
                 } else {
@@ -157,13 +169,18 @@ const DrawerPanel: FC<DrawerProps> = ({
                         bottom: `translateY(-${size}px)`
                     };
                     page!.style.transform = transforms[position];
-                    underlay?.classList.add(`popup-underlay--${position}`);
+                    underlay?.classList.add(`drawer-underlay--${position}`);
                 }
             }, 300);
         }, 100);
     }, [canRender]);
 
-    return <div className="convert-Drawer-overlay"></div>;
+    return (
+        <div className="drawer-wrapper">
+            <div className="convert-Drawer-overlay">{content}</div>
+            {isFooter && <div className="footer-section">{footer}</div>}
+        </div>
+    );
 };
 
 export default DrawerPanel;
